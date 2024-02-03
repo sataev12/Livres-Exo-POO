@@ -3,15 +3,15 @@
 class Livre {
     private string $titre; 
     private int $nbPages;
-    private int $anneeParution;
+    private DateTime $anneeParution;
     private int $prix;
     private Auteur $auteur;
 
-    public function __construct(string $titre, int $nbPages, int $anneeParution, int $prix, Auteur $auteur)
+    public function __construct(string $titre, int $nbPages, string $anneeParution, int $prix, Auteur $auteur)
     {
         $this->titre = $titre;
         $this->nbPages = $nbPages;
-        $this->anneeParution = $anneeParution;
+        $this->anneeParution = new DateTime($anneeParution);
         $this->prix = $prix;
         $this->auteur = $auteur;
     }
@@ -39,15 +39,16 @@ class Livre {
 
         return $this;
     }
+   
     public function getAnneeParution()
     {
-        return $this->anneeParution;
+    return $this->anneeParution;
     }
     public function setAnneeParution($anneeParution)
     {
-        $this->anneeParution = $anneeParution;
+    $this->anneeParution = $anneeParution;
 
-        return $this;
+    return $this;
     }
     public function getPrix()
     {
@@ -69,4 +70,16 @@ class Livre {
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->titre."(".$this->anneeParution->format('Y').")";
+    }
+
+    public function bibliograpfie(){
+        echo "{$this} : {$this->nbPages} pages / {$this->prix} €<br>";
+    }
+    
+    
 }
+
